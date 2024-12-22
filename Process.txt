@@ -1,0 +1,95 @@
+1. Installed Node.js Runtime Environment.
+
+2. Vite Project Initialization:
+    a. Command: `npm init vite@latest todo-app`
+    b. What it does: Initializes a new project using **Vite**, a fast build tool for modern web development.
+        i. `npm init vite@latest`: Creates a project using the latest Vite version.
+        ii. `todo-app`: Specifies the name of the project folder.
+    c. Vite Features:
+        i. Hot Module Replacement (HMR): Updates parts of the app without a full reload, retaining app state and speeding up development.
+        ii. Fast Builds: Uses **ESBuild** for bundling, much faster than traditional tools like Webpack.
+        iii. Framework-Agnostic: Works with React, Vue, Svelte, etc.
+        iv. Bundling: Combines multiple files into a smaller set for better performance.
+
+3. Framework and Variant Selection:
+    a. Selected React as the framework.
+    b. Selected JavaScript as the variant.
+
+4. Next Steps:
+    a. `cd todo-app`: Navigate to the project directory.
+    b. `npm install`: Reads `package.json` and installs dependencies in `node_modules`.
+    c. `npm run dev`: Starts the development server with **HMR** enabled at `http://localhost:3000`.
+    d. For production: Use `npm run build` to create optimized files in the `dist` folder.
+
+5. File Structure:
+    a. `index.html`: Contains only a `<div id='root'>` and a script linking to `src/main.jsx`.
+    b. `main.jsx`: Injects the React app into the `root` using:
+        ```jsx
+        import { createRoot } from 'react-dom/client';
+        createRoot(document.getElementById('root')).render(
+          <StrictMode>
+            <App />
+          </StrictMode>,
+        );
+        ```
+        Strict Mode is optional and only needed for debugging purposes.
+
+6. The App Component:
+    a. **App.jsx** is the root (or "parent") component, containing child components.
+    b. React enables dynamic, reusable UIs using components and the virtual DOM for efficient updates.
+
+7. Working of App.jsx:
+    a. A `.jsx` file is JavaScript with **HTML-like syntax (JSX)**, which is syntactic sugar for JavaScript function calls.
+    b. The `App` function returns JSX that includes child components.
+    c. Inside `{}`, JavaScript expressions can be embedded to dynamically render content.
+        i. Example: `{2 + 3}` outputs `5`.
+
+8. Created a folder called components in src and added the components as Header.jsx, Tabs.jsx, ToDoCard.jsx, ToDoInput.jsx and ToDoList.jsx
+    It is best that we start them with capital letters to avoid any future problems. When to make a component? 1 component for 1 purpose
+    or when code is same.
+
+9. Each JSX file represents a React functional component:
+    a. A JSX file is typically used to define a React functional component.
+    b. These components encapsulate specific parts of the UI and can be reused across the app.
+    c. Each component must be exported to make it accessible in other files where it is used.
+
+    Why must React components be exported?
+        i. Reusability:
+            - Exporting allows the component to be imported and reused in other parts of your app.
+            - Example:
+                export default Header; // Exporting Header component
+                // In another file:
+                import Header from './Header'; // Importing and using it
+
+        ii. Modularity:
+            - Exporting ensures each JSX file/component remains modular and serves a specific purpose.
+            - This aligns with React’s component-based architecture, keeping code organized and maintainable.
+
+        iii. Scope:
+            - Without exporting, the component is only available within its own file, making it inaccessible elsewhere.
+
+    Why use <header> instead of <div> in Header.jsx?
+        i. Semantic HTML:
+            - Using a <header> instead of a generic <div> improves semantic meaning.
+            - A <header> element is specifically designed to represent the introductory content or navigation links of a page or section.
+            - Browsers, screen readers, and search engines interpret <header> differently, making your app more accessible and SEO-friendly.
+
+        ii. Clarity:
+            - Using the appropriate semantic tags (e.g., <header>, <footer>, <main>) makes the code easier to understand and maintain.
+        Write Beader instead of Header and there would be no difference in output.
+    Final Example:
+        // Example of Header.jsx
+        function Header() {
+            return (
+                <header>
+                    <h1>Welcome to My App</h1>
+                </header>
+            );
+        }
+
+        export default Header; // Exporting the component to make it reusable
+
+
+Making sure that we don't lose any old todos: Done through local storage for now using a json
+When loading a page, we check and load any previous data.
+We also use useEffect hook which tracks events.
