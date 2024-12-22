@@ -87,13 +87,20 @@ function App() {
     }
 
     useEffect(() => {
-      if (!localStorage) { return }
-      let db = [] 
-      if (localStorage.getItem('todo-app')) {
-        db = JSON.parse(localStorage.getItem('todo-app'))
+      if (!localStorage) return;
+    
+      let db = { todos: [] }; // ✅ Always has "todos"
+      
+      const savedData = localStorage.getItem('todo-app');
+      if (savedData) {
+        // Merge to ensure "todos" property always exists
+        db = { todos: [], ...JSON.parse(savedData) };
       }
-      setTodos(db.todos)
-    }, [todos])
+    
+      setTodos(db.todos); // Now db.todos is never undefined
+    }, []);
+    
+    
 
     /* Doing <Header todos={todos}/> is like assigning a attribute called todos. Name used here = property where props label and input both are todos */
     return (
